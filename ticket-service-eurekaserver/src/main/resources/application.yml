@@ -1,0 +1,11 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: ticket-service-eurekaserver
+  profiles:
+    active: dev
+  config:
+#    import: configserver:http://ts-configserver-service:8888
+    import: configserver:http://localhost:8888

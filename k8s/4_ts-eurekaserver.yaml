@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ts-eurekaserver-deploy
+  labels:
+    app: ts-eurekaserver-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ts-eurekaserver
+  template:
+    metadata:
+      labels:
+        app: ts-eurekaserver
+    spec:
+      containers:
+      - name: ts-eurekaserver
+        image: cupofjavatech/ticket-service-eurekaserver:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8761
+        env:
+        - name: SPRING_APPLICATION_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: EUREKA_APPLICATION_NAME
+        - name: SPRING_PROFILES_ACTIVE
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: SPRING_PROFILES_ACTIVE
+        - name: SPRING_CONFIG_IMPORT
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: SPRING_CONFIG_IMPORT
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ts-eurekaserver-service
+spec:
+  selector:
+    app: ts-eurekaserver
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8761
+      targetPort: 8761

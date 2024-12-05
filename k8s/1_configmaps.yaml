@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: application-configmap
+data:
+  SPRING_PROFILES_ACTIVE: dev
+  CONFIGSERVER_APPLICATION_NAME: ticket-service-configserver
+  CONFIGSERVER_VOLUME: "/app/config"
+  SPRING_CONFIG_IMPORT: "configserver:http://ts-configserver-service:8888/"
+  EUREKA_APPLICATION_NAME: ticket-service-eurekaserver
+  APIGATEWAY_APPLICATION_NAME: ticket-service-apigateway
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://ts-eurekaserver-service:8761/eureka/"
+  EUREKA_CLIENT_FETCH-REGISTRY: "true"
+  EUREKA_CLIENT_REGISTER-WITH-EUREKA: "true"
+  EUREKA_INSTANCE_PREFER-IP-ADDRESS: "true"
+  FLIGHT_APPLICATION_NAME : flight-service
+  PASSENGER_APPLICATION_NAME: passenger-service
+  TICKET_APPLICATION_NAME: ticket-service

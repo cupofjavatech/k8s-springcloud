@@ -1,0 +1,14 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: "ticket-service-configserver"
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: "file:///D:/java-project/dh-prj/java-t/spring-cloud/config-files"
+#          search-locations: "classpath:/config"

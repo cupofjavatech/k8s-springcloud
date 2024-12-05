@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ts-passengerservice-deploy
+  labels:
+    app: ts-passengerservice-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ts-passengerservice
+  template:
+    metadata:
+      labels:
+        app: ts-passengerservice
+    spec:
+      containers:
+      - name: ts-passengerservice
+        image: cupofjavatech/passenger-service:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8200
+        env:
+        - name: SPRING_APPLICATION_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: PASSENGER_APPLICATION_NAME
+        - name: SPRING_PROFILES_ACTIVE
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: SPRING_PROFILES_ACTIVE
+        - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+        - name: SPRING_CONFIG_IMPORT
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: SPRING_CONFIG_IMPORT
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ts-passengerservice-service
+spec:
+  selector:
+    app: ts-passengerservice
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8200
+      targetPort: 8200

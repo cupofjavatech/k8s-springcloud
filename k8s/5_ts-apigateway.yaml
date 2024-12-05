@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ts-apigateway-deploy
+  labels:
+    app: ts-apigateway-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ts-apigateway
+  template:
+    metadata:
+      labels:
+        app: ts-apigateway
+    spec:
+      containers:
+      - name: ts-apigateway
+        image: cupofjavatech/ticket-service-apigateway:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8765
+        env:
+        - name: SPRING_APPLICATION_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: APIGATEWAY_APPLICATION_NAME
+        - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ts-apigateway-service
+spec:
+  selector:
+    app: ts-apigateway
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8765
+      targetPort: 8765

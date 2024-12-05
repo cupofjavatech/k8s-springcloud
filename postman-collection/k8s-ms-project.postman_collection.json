@@ -1,0 +1,487 @@
+{
+	"info": {
+		"_postman_id": "0e5570d5-e886-4618-8bf2-3330ec3fe78c",
+		"name": "k8s-ms-project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29339205"
+	},
+	"item": [
+		{
+			"name": "passenger",
+			"item": [
+				{
+					"name": "pass-findbyid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8200/passenger/find/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8200",
+							"path": [
+								"passenger",
+								"find",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pass-add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Passenger-test1\",\r\n    \"passportNo\": \"PASSPORT_test1\",\r\n    \"age\": 25,\r\n    \"nationality\": \"USA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8200/passenger/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8200",
+							"path": [
+								"passenger",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pass-update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passportNo\": \"PASSPORT_test2\",\r\n    \"age\": 25,\r\n    \"nationality\": \"INDIAN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8200/passenger/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8200",
+							"path": [
+								"passenger",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ticket-passenger",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"passportNo\": \"PASSPORT_16\"\r\n    },\r\n    {\r\n        \"passportNo\": \"PASSPORT_17\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8200/passenger/ticket-passenger/25",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8200",
+							"path": [
+								"passenger",
+								"ticket-passenger",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findby-ticketid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8200/passenger/ticket/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8200",
+							"path": [
+								"passenger",
+								"ticket",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "passenger-profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8200/passenger/active-profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8200",
+							"path": [
+								"passenger",
+								"active-profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "flight",
+			"item": [
+				{
+					"name": "get-flight-by-fnum",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8100/flight/flightnumber/222",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8100",
+							"path": [
+								"flight",
+								"flightnumber",
+								"222"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "flight-profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8100/flight/active-profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8100",
+							"path": [
+								"flight",
+								"active-profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "flight-all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8100/flight/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8100",
+							"path": [
+								"flight",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "flight-fron-to",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8100/flight/from/AHMEDABAD/to/MUMBAI/date/15092023",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8100",
+							"path": [
+								"flight",
+								"from",
+								"AHMEDABAD",
+								"to",
+								"MUMBAI",
+								"date",
+								"15092023"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "flight-add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"flightNo\": \"6324332\",\r\n    \"capacity\": 300,\r\n    \"fromStation\": \"Delhi\",\r\n    \"toStation\": \"Ahmedabad\",\r\n    \"fromCode\": \"DHL\",\r\n    \"toCode\": \"AMD\",\r\n    \"departure\": \"2023-09-15T04:30:00.000+00:00\",\r\n    \"arrival\": \"2023-09-15T06:30:00.000+00:00\",\r\n    \"price\": 4000.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8100/flight/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8100",
+							"path": [
+								"flight",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ticket",
+			"item": [
+				{
+					"name": "ticket-details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8300/ticket/ticket-details/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8300",
+							"path": [
+								"ticket",
+								"ticket-details",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ticket-create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"listPassenger\": [\r\n        {\r\n            \"passportNo\": \"PASSPORT_20\"\r\n        },\r\n        {\r\n            \"passportNo\": \"PASSPORT_21\"\r\n        }\r\n    ],\r\n    \"flight\": {\r\n        \"flightNo\": \"222\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8300/ticket/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8300",
+							"path": [
+								"ticket",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ticket-profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8300/ticket/active-profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8300",
+							"path": [
+								"ticket",
+								"active-profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api-gateway",
+			"item": [
+				{
+					"name": "gateway-pass-findbyid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/passenger/find/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"passenger",
+								"find",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gateway-flight-all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/flight/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"flight",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gateway-ticket-details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/ticket/ticket-details/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"ticket",
+								"ticket-details",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "passenger-profile'",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/passenger/active-profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"passenger",
+								"active-profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "flight-profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/flight/active-profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"flight",
+								"active-profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ticket-profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8765/ticket/active-profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"ticket",
+								"active-profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

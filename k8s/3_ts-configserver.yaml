@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ts-configserver-deploy
+  labels:
+    app: ts-configserver-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ts-configserver
+  template:
+    metadata:
+      labels:
+        app: ts-configserver
+    spec:
+      containers:
+      - name: ts-configserver
+        image: cupofjavatech/ticket-service-configserver:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8888
+        volumeMounts:
+          - mountPath: /app/config
+            name: config-volume
+        env:
+        - name: SPRING_APPLICATION_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: CONFIGSERVER_APPLICATION_NAME
+        - name: SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH-LOCATIONS
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: CONFIGSERVER_VOLUME          
+      volumes:
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: ticket-host-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ts-configserver-service
+spec:
+  selector:
+    app: ts-configserver
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 8888

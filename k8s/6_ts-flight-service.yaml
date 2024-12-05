@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ts-flightservice-deploy
+  labels:
+    app: ts-flightservice-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ts-flightservice
+  template:
+    metadata:
+      labels:
+        app: ts-flightservice
+    spec:
+      containers:
+      - name: ts-flightservice
+        image: cupofjavatech/flight-service:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8100
+        env:
+        - name: SPRING_APPLICATION_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: FLIGHT_APPLICATION_NAME
+        - name: SPRING_PROFILES_ACTIVE
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: SPRING_PROFILES_ACTIVE
+        - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+        - name: SPRING_CONFIG_IMPORT
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: SPRING_CONFIG_IMPORT
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ts-flightservice-service
+spec:
+  selector:
+    app: ts-flightservice
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8100
+      targetPort: 8100
